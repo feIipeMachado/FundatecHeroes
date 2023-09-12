@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import com.example.fundatecheroes.home.presentation.model.HomeViewState
 
 class HomeActivity : AppCompatActivity() {
     private val button by lazy {
@@ -14,7 +15,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         val button = findViewById<Button>(R.id.button)
-        observerState(HomeViewState.gone)
+        observerState(HomeViewState.HideButton)
     }
 
     private fun observerState(state: HomeViewState) {
@@ -28,16 +29,10 @@ class HomeActivity : AppCompatActivity() {
             is HomeViewState.Loading -> {
 
             }
-            is HomeViewState.gone -> {
+            is HomeViewState.HideButton -> {
                 button.gone()
             }
         }
     }
 }
 
-sealed class HomeViewState {
-    data class Success(val message: String) : HomeViewState()
-    object Loading : HomeViewState()
-    data class Error(val errorMessage: String) : HomeViewState()
-    object gone : HomeViewState()
-}
