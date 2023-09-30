@@ -19,6 +19,13 @@ class LoginScreenActivity : AppCompatActivity() {
             val intent = Intent(this@LoginScreenActivity, HomeActivity::class.java)
             startActivity(intent)
         }
+
+        val novoPorAqui = findViewById<Button>(R.id.novoPorAqui)
+
+        novoPorAqui.setOnClickListener {
+            val intent = Intent(this@LoginScreenActivity,ProfileActivity::class.java)
+            startActivity(intent)
+        }
     }
 
 
