@@ -1,70 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".login.LoginScreenActivity">
+    tools:context=".login.view.LoginScreenActivity">
 
   <ImageView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:padding="15dp"
       android:src="@drawable/logofundatec"
-      android:padding="30dp"
-      app:layout_constraintBottom_toTopOf="@id/email"
-      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintBottom_toTopOf="@+id/input_login_email"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      />
+      app:layout_constraintTop_toTopOf="parent" />
 
-
-  <EditText
-      android:id="@+id/email"
+  <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/input_login_email"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_margin="30dp"
-      android:padding="20dp"
-      style="@style/Textview"
+      app:boxBackgroundColor="@color/white"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      android:hint="E-mail"
-      />
+      >
 
-  <EditText
-      android:id="@+id/senha"
+    <EditText
+        android:id="@+id/login_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/campo_email"
+        android:inputType="textEmailAddress"
+        android:padding="20dp"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        />
+  </com.google.android.material.textfield.TextInputLayout>
+
+
+  <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/input_login_senha"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_margin="30dp"
-      android:padding="20dp"
-      style="@style/Textview"
-      app:layout_constraintEnd_toEndOf="parent"
+      app:boxBackgroundColor="@color/white"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/email"
-      android:hint="Senha"
-      android:inputType="textPassword"
-      />
+      app:layout_constraintTop_toBottomOf="@+id/input_login_email">
+
+    <EditText
+        android:id="@+id/login_senha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/campo_senha"
+        android:inputType="textPassword"
+        android:padding="20dp"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        />
+  </com.google.android.material.textfield.TextInputLayout>
 
   <Button
       android:id="@+id/login"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      app:layout_constraintStart_toStartOf="@id/senha"
-      app:layout_constraintTop_toBottomOf="@+id/senha"
-      android:text="Login"
-    />
+      android:text="@string/botao_login"
+      android:layout_marginTop="20dp"
+      app:layout_constraintStart_toStartOf="@id/input_login_senha"
+      app:layout_constraintTop_toBottomOf="@+id/input_login_senha" />
+
   <Button
       android:id="@+id/criarConta"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_margin="60dp"
-      app:layout_constraintStart_toStartOf="parent"
+      android:text="@string/botao_criar_conta"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/login"
-      android:text="Novo por aqui?"
-      />
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/login" />
 
 
-  </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
