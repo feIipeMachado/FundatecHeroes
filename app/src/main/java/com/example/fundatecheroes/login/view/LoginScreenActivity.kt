@@ -16,22 +16,29 @@ class LoginScreenActivity : AppCompatActivity() {
         getSupportActionBar()?.hide()
         setContentView(binding.root)
 
-        BotaoLogin()
-        BotaoCriarConta()
+        botaoLogin()
+        botaoCriarConta()
     }
 
-    private fun BotaoLogin() {
+    private fun botaoLogin() {
         binding.login.setOnClickListener {
             val intent = Intent(this@LoginScreenActivity, HomeActivity::class.java)
             startActivity(intent)
         }
     }
 
-    private fun BotaoCriarConta() {
+    private fun botaoCriarConta() {
         binding.criarConta.setOnClickListener {
             val intent = Intent(this@LoginScreenActivity, ProfileScreenActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun mostrarErroEmail() {
+        binding.loginEmail.error = "digite um email válido"
+    }
+    private fun mostrarEmailError() {
+        binding.loginSenha.error = "digite uma senha válido"
     }
 
 

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import com.example.fundatecheroes.HomeActivity
 import com.example.fundatecheroes.R
 import com.example.fundatecheroes.databinding.ActivityProfileScreenBinding
@@ -20,21 +21,21 @@ class ProfileScreenActivity : AppCompatActivity() {
         supportActionBar?.hide()
         setContentView(binding.root)
 
-        val nome = binding.loginNome.toString()
-        val email = binding.loginEmail.toString()
-        val senha = binding.loginSenha.toString()
-
         binding.criarConta.setOnClickListener {
-            if (!validarNome(nome)) {
+            val nome = binding.loginNome.text.toString()
+            val email = binding.loginEmail.text.toString()
+            val senha = binding.loginSenha.text.toString()
+            if (validarNome(nome)) {
                 snackbarNomeInvalido()
-            } else if (!validarEmail(email)) {
+            } else if (validarEmail(email)) {
                 snackbarEmailInvalido()
-            } else if (!validarSenha(senha)) {
+            } else if (validarSenha(senha)) {
                 snackbarSenhaInvalida()
             } else {
                 snackbarSucesso()
             }
         }
+
     }
 
     private fun navegarHome() {
@@ -43,15 +44,15 @@ class ProfileScreenActivity : AppCompatActivity() {
     }
 
     private fun validarNome(nome: String): Boolean {
-        return nome.isNotEmpty()
+        return nome.isNullOrBlank()
     }
 
     private fun validarEmail(email: String): Boolean {
-        return email.contains("@") && email.contains(".com")
+        return !email.contains("@") && !email.contains(".com")
     }
 
     private fun validarSenha(senha: String): Boolean {
-        return senha.length >=8
+        return senha.length < 8
     }
 
     private fun snackbarSucesso() {
