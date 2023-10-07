@@ -4,25 +4,21 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.fundatecheroes.login.view.presentation.model.LoginViewState
 import com.google.android.material.snackbar.Snackbar
 
 class LoginViewModel : ViewModel() {
 
-
-    /*private val LoginViewState: MutableLiveData<String> = MutableLiveData()
-
+    private val viewState: MutableLiveData<LoginViewState> = MutableLiveData()
+    val state: LiveData<LoginViewState> = viewState
 
     fun validarInputs(email: String?, password: String?) {
         if (email.isNullOrBlank()) {
-            emailState.value = "Digite um email valido"
+            viewState.value = LoginViewState.ShowEmailError
         }
 
         if (password.isNullOrBlank()) {
-            passwordState.value = "Digite uma senha valida"
+            viewState.value = LoginViewState.ShowPasswordError
         }
-
-    }*/
-
-
-
+    }
 }
