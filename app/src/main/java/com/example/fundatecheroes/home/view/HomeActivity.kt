@@ -4,50 +4,35 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import com.example.fundatecheroes.databinding.ActivityHomeBinding
+import com.example.fundatecheroes.home.domain.CharacterModel
 import com.example.fundatecheroes.home.presentation.model.HomeViewState
+import com.example.fundatecheroes.home.view.CharacterListAdapter
 
 class HomeActivity : AppCompatActivity() {
-    private val button by lazy {
-        findViewById<Button>(R.id.button)
+    private lateinit var binding: ActivityHomeBinding
+
+    private val adapter: CharacterListAdapter by lazy {
+        CharacterListAdapter()
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        binding.batman.adapter = adapter
+        adapter.addList(
+            listOf(
+                CharacterModel(
+                    "batman",
+                    "https://s2-g1.glbimg.com/bZJPGF3z5sKBM2qx9LQTikw7zc4=/1200x/smart/filters:cover():strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2022/m/U/1UvLUASZAevRCb1TBygQ/the-batman-robert-pattinson.jpeg"
+                )
+            )
+        )
 
-        observerState(HomeViewState.HideButton)
     }
 
-    override fun onStart() {
-        super.onStart()
-    }
 
-    override fun onResume() {
-        super.onResume()
-    }
-
-    override fun onStop() {
-        super.onStop()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
-    private fun observerState(state: HomeViewState) {
-        when(state) {
-            is HomeViewState.Success -> {
-                state.message
-            }
-            is HomeViewState.Error -> {
-                state.errorMessage
-            }
-            is HomeViewState.Loading -> {
-
-            }
-            is HomeViewState.HideButton -> {
-                button.gone()
-            }
-        }
-    }
 }
+
 

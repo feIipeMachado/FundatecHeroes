@@ -1,4 +1,6 @@
 package com.example.fundatecheroes.home.domain
 
-class CharacterModel {
-}
+data class CharacterModel(
+    val name: String,
+    val image: String
+)
