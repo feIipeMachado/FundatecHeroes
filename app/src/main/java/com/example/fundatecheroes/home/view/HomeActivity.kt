@@ -26,9 +26,22 @@ class HomeActivity : AppCompatActivity() {
                 CharacterModel(
                     "batman",
                     "https://s2-g1.glbimg.com/bZJPGF3z5sKBM2qx9LQTikw7zc4=/1200x/smart/filters:cover():strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2022/m/U/1UvLUASZAevRCb1TBygQ/the-batman-robert-pattinson.jpeg"
+                ),
+                CharacterModel(
+                    "batman",
+                    "https://s2-g1.glbimg.com/bZJPGF3z5sKBM2qx9LQTikw7zc4=/1200x/smart/filters:cover():strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2022/m/U/1UvLUASZAevRCb1TBygQ/the-batman-robert-pattinson.jpeg"
+                ),
+                CharacterModel(
+                    "batman",
+                    "https://s2-g1.glbimg.com/bZJPGF3z5sKBM2qx9LQTikw7zc4=/1200x/smart/filters:cover():strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2022/m/U/1UvLUASZAevRCb1TBygQ/the-batman-robert-pattinson.jpeg"
                 )
+
             )
         )
+
+        binding.removerPersonagem.setOnClickListener {
+            adapter.removeItem()
+        }
 
     }
 

@@ -9,12 +9,22 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/batman"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:itemCount="2"
-        tools:layout_editor_absoluteX="-16dp"
-        tools:layout_editor_absoluteY="-205dp"
-        tools:listitem="@layout/character_item_list"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        />
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintTop_toTopOf="parent"
+        app:spanCount="2"
+        tools:itemCount="4"
+        tools:listitem="@layout/character_item_list" />
+
+    <Button
+        android:id="@+id/remover_personagem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:text="Remover personagem"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/batman" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
