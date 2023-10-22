@@ -1,12 +1,11 @@
 package com.example.fundatecheroes
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
+import com.example.fundatecheroes.character_creation.view.CharacterCreationActivity
 import com.example.fundatecheroes.databinding.ActivityHomeBinding
 import com.example.fundatecheroes.home.domain.CharacterModel
-import com.example.fundatecheroes.home.presentation.model.HomeViewState
 import com.example.fundatecheroes.home.view.CharacterListAdapter
 
 class HomeActivity : AppCompatActivity() {
@@ -41,6 +40,11 @@ class HomeActivity : AppCompatActivity() {
 
         binding.removerPersonagem.setOnClickListener {
             adapter.removeItem()
+        }
+
+        binding.criarPersonagem.setOnClickListener{
+            val intent = Intent(this@HomeActivity, CharacterCreationActivity::class.java)
+            startActivity(intent)
         }
 
     }

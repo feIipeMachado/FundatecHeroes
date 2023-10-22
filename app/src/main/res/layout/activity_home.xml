@@ -6,15 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/criar_personagem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="10dp"
+        android:src="@drawable/plus_svgrepo_com"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/batman"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/criar_personagem"
         app:spanCount="2"
-        tools:itemCount="4"
+        tools:itemCount="1"
         tools:listitem="@layout/character_item_list" />
 
     <Button
@@ -26,5 +36,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/batman" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
