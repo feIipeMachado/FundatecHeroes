@@ -1,10 +1,10 @@
-package com.example.fundatecheroes.login.view.presentation
+package com.example.fundatecheroes.login.presentation
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.fundatecheroes.login.view.presentation.model.LoginViewState
+import com.example.fundatecheroes.login.presentation.model.LoginViewState
 import com.google.android.material.snackbar.Snackbar
 
 class LoginViewModel : ViewModel() {

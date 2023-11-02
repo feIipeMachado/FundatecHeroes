@@ -6,8 +6,8 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.example.fundatecheroes.HomeActivity
 import com.example.fundatecheroes.databinding.ActivityLoginScreenBinding
-import com.example.fundatecheroes.login.view.presentation.LoginViewModel
-import com.example.fundatecheroes.login.view.presentation.model.LoginViewState
+import com.example.fundatecheroes.login.presentation.LoginViewModel
+import com.example.fundatecheroes.login.presentation.model.LoginViewState
 import com.example.fundatecheroes.profile.view.ProfileScreenActivity
 
 class LoginScreenActivity : AppCompatActivity() {
