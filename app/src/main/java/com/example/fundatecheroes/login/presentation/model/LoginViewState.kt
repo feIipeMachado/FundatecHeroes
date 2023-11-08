@@ -1,4 +1,4 @@
-package com.example.fundatecheroes.login.view.presentation.model
+package com.example.fundatecheroes.login.presentation.model
 
 sealed class LoginViewState {
     data class Success(val message: String) : LoginViewState()
