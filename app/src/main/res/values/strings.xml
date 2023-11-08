@@ -12,4 +12,21 @@
     <string name="nome_invalido">Nome inválido</string>
     <string name="email_invalido">E-mail inválido</string>
     <string name="senha_invalida">Senha inválida</string>
+    <string name="campo_descricao">Descrição</string>
+    <string name="data_nascimento">Data de nascimento</string>
+    <string name="personagem_url">URL da imagem</string>
+    <string name="criar_personagem">Criar personagem</string>
+    <string name="descricao_vazia">O campo da descrição está vazio</string>
+    <string name="nome_vazio">O campo do nome está vazio</string>
+    <string name="url_vazia">O campo da URL está vazio</string>
+    <string name="personagem_criado">Personagem criado com sucesso!</string>
+    <string-array name="heroi_ou_vilao">
+        <item>Herói</item>
+        <item>Vilão</item>
+    </string-array>
+    <string-array name="marvel_ou_dc">
+        <item>Marvel</item>
+        <item>DC</item>
+    </string-array>
+
 </resources>
