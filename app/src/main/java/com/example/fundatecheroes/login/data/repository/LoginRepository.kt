@@ -32,4 +32,22 @@ class LoginRepository {
             }
         }
     }
+
+    suspend fun loginUser(
+        email: String,
+        password: String,
+    ): Boolean {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = repository.loginUser(
+                    email = email,
+                    password = password,
+                    )
+                response.isSuccessful
+            } catch (ex: Exception) {
+                Log.e("createUser", ex.message.toString())
+                false
+            }
+        }
+    }
 }

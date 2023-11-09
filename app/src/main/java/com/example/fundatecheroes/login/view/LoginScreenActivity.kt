@@ -24,11 +24,12 @@ class LoginScreenActivity : AppCompatActivity() {
 
         viewModel.state.observe(this) {
             when (it) {
-                is LoginViewState.Success -> TODO()
+                is LoginViewState.Success -> navegarTelaHome()
                 is LoginViewState.Error -> TODO()
                 LoginViewState.Loading -> TODO()
                 LoginViewState.ShowEmailError ->
                     mostrarErroEmail()
+
                 LoginViewState.ShowPasswordError ->
                     mostrarErroSenha()
             }
@@ -37,9 +38,16 @@ class LoginScreenActivity : AppCompatActivity() {
 
     private fun botaoLogin() {
         binding.login.setOnClickListener {
-            val intent = Intent(this@LoginScreenActivity, HomeActivity::class.java)
-            startActivity(intent)
+            viewModel.validarInputs(
+                email = binding.loginEmail.text.toString(),
+                password = binding.loginSenha.text.toString()
+            )
         }
+    }
+
+    private fun navegarTelaHome() {
+        val intent = Intent(this@LoginScreenActivity, HomeActivity::class.java)
+        startActivity(intent)
     }
 
     private fun botaoCriarConta() {
@@ -48,7 +56,6 @@ class LoginScreenActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-
     private fun mostrarErroEmail() {
         binding.loginEmail.error = "digite um email válido"
     }
