@@ -15,5 +15,16 @@ class LoginUseCase {
         )
     }
 
+    suspend fun createUser(
+        name: String,
+        email: String,
+        password: String,
+    ): Boolean {
+        return repository.createUser(
+            name = name,
+            email = email,
+            password = password,
+        )
+    }
 
 }

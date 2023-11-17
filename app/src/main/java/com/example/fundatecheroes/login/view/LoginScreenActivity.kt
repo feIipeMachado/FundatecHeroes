@@ -5,10 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.example.fundatecheroes.HomeActivity
+import com.example.fundatecheroes.R
 import com.example.fundatecheroes.databinding.ActivityLoginScreenBinding
 import com.example.fundatecheroes.login.presentation.LoginViewModel
 import com.example.fundatecheroes.login.presentation.model.LoginViewState
 import com.example.fundatecheroes.profile.view.ProfileScreenActivity
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 
 class LoginScreenActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginScreenBinding
@@ -25,13 +28,13 @@ class LoginScreenActivity : AppCompatActivity() {
         viewModel.state.observe(this) {
             when (it) {
                 is LoginViewState.Success -> navegarTelaHome()
-                is LoginViewState.Error -> TODO()
+                is LoginViewState.Error -> SnackbarErroGeral()
                 LoginViewState.Loading -> TODO()
                 LoginViewState.ShowEmailError ->
-                    mostrarErroEmail()
+                   SnackbarErroEmail()
 
                 LoginViewState.ShowPasswordError ->
-                    mostrarErroSenha()
+                    SnackbarErroSenha()
             }
         }
     }
@@ -56,11 +59,32 @@ class LoginScreenActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-    private fun mostrarErroEmail() {
-        binding.loginEmail.error = "digite um email válido"
+
+    private fun SnackbarErroEmail() {
+        Snackbar.make(
+            binding.root,
+            R.string.email_invalido,
+            BaseTransientBottomBar.LENGTH_LONG
+        )
+            .show()
+
     }
 
-    private fun mostrarErroSenha() {
-        binding.loginSenha.error = "digite uma senha válido"
+    private fun SnackbarErroSenha() {
+        Snackbar.make(
+            binding.root,
+            R.string.senha_invalida,
+            BaseTransientBottomBar.LENGTH_LONG
+        )
+            .show()
+    }
+
+    private fun SnackbarErroGeral() {
+        Snackbar.make(
+            binding.root,
+            "Login ou senha inválidos",
+            BaseTransientBottomBar.LENGTH_LONG
+        )
+            .show()
     }
 }

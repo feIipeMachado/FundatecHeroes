@@ -6,14 +6,19 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import androidx.activity.viewModels
 import com.example.fundatecheroes.HomeActivity
 import com.example.fundatecheroes.R
 import com.example.fundatecheroes.databinding.ActivityProfileScreenBinding
+import com.example.fundatecheroes.login.presentation.LoginViewModel
+import com.example.fundatecheroes.login.presentation.model.LoginViewState
+import com.example.fundatecheroes.profile.presentation.ProfileViewModel
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_LONG
 import com.google.android.material.snackbar.Snackbar
 
 class ProfileScreenActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfileScreenBinding
+    private val viewModel: ProfileViewModel by viewModels();
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileScreenBinding.inflate(layoutInflater)
@@ -21,18 +26,16 @@ class ProfileScreenActivity : AppCompatActivity() {
         supportActionBar?.hide()
         setContentView(binding.root)
 
-        binding.criarConta.setOnClickListener {
-            val nome = binding.loginNome.text.toString()
-            val email = binding.loginEmail.text.toString()
-            val senha = binding.loginSenha.text.toString()
-            if (validarNome(nome)) {
-                snackbarNomeInvalido()
-            } else if (validarEmail(email)) {
-                snackbarEmailInvalido()
-            } else if (validarSenha(senha)) {
-                snackbarSenhaInvalida()
-            } else {
-                snackbarSucesso()
+        viewModel.state.observe(this) {
+            when (it) {
+                is ProfileViewModel.Success -> navegarTelaHome()
+                is LoginViewState.Error -> SnackbarErroGeral()
+                LoginViewState.Loading -> TODO()
+                LoginViewState.ShowEmailError ->
+                    SnackbarErroEmail()
+
+                LoginViewState.ShowPasswordError ->
+                    SnackbarErroSenha()
             }
         }
 
@@ -43,17 +46,6 @@ class ProfileScreenActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun validarNome(nome: String): Boolean {
-        return nome.isNullOrBlank()
-    }
-
-    private fun validarEmail(email: String): Boolean {
-        return !email.contains("@") && !email.contains(".com")
-    }
-
-    private fun validarSenha(senha: String): Boolean {
-        return senha.length < 8
-    }
 
     private fun snackbarSucesso() {
         Snackbar.make(
