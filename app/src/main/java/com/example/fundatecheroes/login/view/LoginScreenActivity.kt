@@ -3,15 +3,20 @@ package com.example.fundatecheroes.login.view
 import  android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.activity.viewModels
 import com.example.fundatecheroes.HomeActivity
 import com.example.fundatecheroes.R
 import com.example.fundatecheroes.databinding.ActivityLoginScreenBinding
+import com.example.fundatecheroes.gone
 import com.example.fundatecheroes.login.presentation.LoginViewModel
 import com.example.fundatecheroes.login.presentation.model.LoginViewState
 import com.example.fundatecheroes.profile.view.ProfileScreenActivity
+import com.example.fundatecheroes.visible
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.delay
 
 class LoginScreenActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginScreenBinding
@@ -19,7 +24,7 @@ class LoginScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginScreenBinding.inflate(layoutInflater)
-        getSupportActionBar()?.hide()
+        supportActionBar?.hide()
         setContentView(binding.root)
 
         botaoLogin()
@@ -27,14 +32,14 @@ class LoginScreenActivity : AppCompatActivity() {
 
         viewModel.state.observe(this) {
             when (it) {
-                is LoginViewState.Success -> navegarTelaHome()
-                is LoginViewState.Error -> SnackbarErroGeral()
-                LoginViewState.Loading -> TODO()
-                LoginViewState.ShowEmailError ->
-                   SnackbarErroEmail()
+                is LoginViewState.Success -> snackbarSucesso()
+                is LoginViewState.ErroGeral -> snackbarErroGeral()
+                LoginViewState.Loading -> binding.carregando.visible()
+                LoginViewState.EmailEmBranco ->
+                   snackbarEmailEmBranco()
 
-                LoginViewState.ShowPasswordError ->
-                    SnackbarErroSenha()
+                LoginViewState.SenhaEmBranco ->
+                    snackbarSenhaEmBranco()
             }
         }
     }
@@ -51,6 +56,20 @@ class LoginScreenActivity : AppCompatActivity() {
     private fun navegarTelaHome() {
         val intent = Intent(this@LoginScreenActivity, HomeActivity::class.java)
         startActivity(intent)
+        finish()
+    }
+
+    private fun snackbarSucesso() {
+        Snackbar.make(
+            binding.root,
+            "Login feito com sucesso",
+            BaseTransientBottomBar.LENGTH_LONG
+        )
+            .show()
+        binding.carregando.gone()
+
+        Handler(Looper.getMainLooper()).postDelayed({navegarTelaHome()}, 300L)
+
     }
 
     private fun botaoCriarConta() {
@@ -60,31 +79,39 @@ class LoginScreenActivity : AppCompatActivity() {
         }
     }
 
-    private fun SnackbarErroEmail() {
+    private fun snackbarEmailEmBranco() {
         Snackbar.make(
             binding.root,
-            R.string.email_invalido,
+            R.string.email_embranco_login,
             BaseTransientBottomBar.LENGTH_LONG
         )
             .show()
+        binding.carregando.gone()
+
 
     }
 
-    private fun SnackbarErroSenha() {
+    private fun snackbarSenhaEmBranco() {
         Snackbar.make(
             binding.root,
-            R.string.senha_invalida,
+            R.string.senha_embranco_login,
             BaseTransientBottomBar.LENGTH_LONG
         )
             .show()
+        binding.carregando.gone()
+
     }
 
-    private fun SnackbarErroGeral() {
+    private fun snackbarErroGeral() {
         Snackbar.make(
             binding.root,
-            "Login ou senha inválidos",
+            R.string.erro_geral_login,
             BaseTransientBottomBar.LENGTH_LONG
         )
             .show()
+        binding.carregando.gone()
+
     }
+
+
 }

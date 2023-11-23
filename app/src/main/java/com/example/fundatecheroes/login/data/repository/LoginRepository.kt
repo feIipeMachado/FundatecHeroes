@@ -11,6 +11,23 @@ class LoginRepository {
         baseUrl = "https://fundatec.herokuapp.com"
     ).create(LoginService::class.java)
 
+    suspend fun loginUser(
+        email: String,
+        password: String,
+    ): Boolean {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = repository.loginUser(
+                    email = email,
+                    password = password,
+                    )
+                response.isSuccessful
+            } catch (ex: Exception) {
+                Log.e("createUser", ex.message.toString())
+                false
+            }
+        }
+    }
     suspend fun createUser(
         name: String,
         email: String,
@@ -25,24 +42,6 @@ class LoginRepository {
                         password = password,
                     )
                 )
-                response.isSuccessful
-            } catch (ex: Exception) {
-                Log.e("createUser", ex.message.toString())
-                false
-            }
-        }
-    }
-
-    suspend fun loginUser(
-        email: String,
-        password: String,
-    ): Boolean {
-        return withContext(Dispatchers.IO) {
-            try {
-                val response = repository.loginUser(
-                    email = email,
-                    password = password,
-                    )
                 response.isSuccessful
             } catch (ex: Exception) {
                 Log.e("createUser", ex.message.toString())

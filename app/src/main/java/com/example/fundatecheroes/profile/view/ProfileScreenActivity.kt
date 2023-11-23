@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.provider.ContactsContract.Profile
 import android.util.Log
 import androidx.activity.viewModels
 import com.example.fundatecheroes.HomeActivity
@@ -12,7 +13,10 @@ import com.example.fundatecheroes.R
 import com.example.fundatecheroes.databinding.ActivityProfileScreenBinding
 import com.example.fundatecheroes.login.presentation.LoginViewModel
 import com.example.fundatecheroes.login.presentation.model.LoginViewState
+import com.example.fundatecheroes.login.view.LoginScreenActivity
 import com.example.fundatecheroes.profile.presentation.ProfileViewModel
+import com.example.fundatecheroes.profile.presentation.model.ProfileViewState
+import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_LONG
 import com.google.android.material.snackbar.Snackbar
 
@@ -26,24 +30,37 @@ class ProfileScreenActivity : AppCompatActivity() {
         supportActionBar?.hide()
         setContentView(binding.root)
 
+        botaoCriarConta()
+
         viewModel.state.observe(this) {
             when (it) {
-                is ProfileViewModel.Success -> navegarTelaHome()
-                is LoginViewState.Error -> SnackbarErroGeral()
-                LoginViewState.Loading -> TODO()
-                LoginViewState.ShowEmailError ->
-                    SnackbarErroEmail()
+                is ProfileViewState.Success -> snackbarSucesso()
+                is ProfileViewState.Error -> snackbarErroGeral()
+                ProfileViewState.Loading -> TODO()
+                ProfileViewState.NameError ->
+                    snackbarNomeInvalido()
 
-                LoginViewState.ShowPasswordError ->
-                    SnackbarErroSenha()
+                ProfileViewState.EmailError ->
+                    snackbarEmailInvalido()
+
+                ProfileViewState.PasswordError ->
+                    snackbarSenhaInvalida()
             }
         }
 
     }
 
-    private fun navegarHome() {
-        val intent = Intent(this@ProfileScreenActivity, HomeActivity::class.java)
-        startActivity(intent)
+    private fun botaoCriarConta() {
+        binding.criarConta.setOnClickListener {
+            viewModel.validarInputs(
+                name = binding.loginNome.text.toString(),
+                email = binding.loginEmail.text.toString(),
+                password = binding.loginSenha.text.toString()
+            )
+        }
+    }
+    private fun navegarTelaLogin() {
+        finish()
     }
 
 
@@ -55,14 +72,14 @@ class ProfileScreenActivity : AppCompatActivity() {
         )
             .show()
 
-        Handler(Looper.getMainLooper()).postDelayed({navegarHome()}, 2000L)
+        Handler(Looper.getMainLooper()).postDelayed({navegarTelaLogin()}, 300L)
 
     }
 
     private fun snackbarNomeInvalido() {
         Snackbar.make(
             binding.root,
-            R.string.nome_invalido,
+            R.string.nome_invalido_profile,
             LENGTH_LONG
         )
             .show()
@@ -72,7 +89,7 @@ class ProfileScreenActivity : AppCompatActivity() {
     private fun snackbarEmailInvalido() {
         Snackbar.make(
             binding.root,
-            R.string.email_invalido,
+            R.string.email_invalido_profile,
             LENGTH_LONG
         )
             .show()
@@ -82,9 +99,19 @@ class ProfileScreenActivity : AppCompatActivity() {
     private fun snackbarSenhaInvalida() {
         Snackbar.make(
             binding.root,
-            R.string.senha_invalida,
+            R.string.senha_invalida_profile,
             LENGTH_LONG
         )
             .show()
     }
+
+    private fun snackbarErroGeral() {
+        Snackbar.make(
+            binding.root,
+            R.string.erro_geral_profile,
+            BaseTransientBottomBar.LENGTH_LONG
+        )
+            .show()
+    }
+
 }

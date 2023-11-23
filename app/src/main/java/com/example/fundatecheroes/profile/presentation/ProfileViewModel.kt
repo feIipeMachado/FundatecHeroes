@@ -20,15 +20,18 @@ class ProfileViewModel : ViewModel() {
 
     fun validarInputs(name: String, email: String, password: String) {
         if (name.isNullOrEmpty()) {
-            viewState.value = ProfileViewState.ShowNameError
+            viewState.value = ProfileViewState.NameError
+            return
         }
 
         if (!email.contains("@") && !email.contains(".com")) {
-            viewState.value = ProfileViewState.ShowEmailError
+            viewState.value = ProfileViewState.EmailError
+            return
         }
 
         if (password.length < 8) {
-            viewState.value = ProfileViewState.ShowPasswordError
+            viewState.value = ProfileViewState.PasswordError
+            return
         }
 
         viewModelScope.launch {

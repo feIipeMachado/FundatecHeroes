@@ -6,9 +6,9 @@ sealed class ProfileViewState {
     object Success : ProfileViewState()
     object Loading : ProfileViewState()
     object Error : ProfileViewState()
-    object ShowNameError : ProfileViewState()
-    object ShowEmailError : ProfileViewState()
-    object ShowPasswordError : ProfileViewState()
+    object NameError : ProfileViewState()
+    object EmailError : ProfileViewState()
+    object PasswordError : ProfileViewState()
 
 
 }
