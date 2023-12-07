@@ -4,7 +4,6 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.Date
 
-/* configurando pro usuario ficar logado dps*/
 
 @Entity(tableName = "user_table")
 data class UserEntity(

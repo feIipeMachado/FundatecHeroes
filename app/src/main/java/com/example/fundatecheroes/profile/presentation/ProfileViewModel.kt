@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.fundatecheroes.login.presentation.model.LoginViewState
 import com.example.fundatecheroes.profile.presentation.model.ProfileViewState
 import kotlinx.coroutines.launch
 

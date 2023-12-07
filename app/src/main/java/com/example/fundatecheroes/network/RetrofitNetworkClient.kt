@@ -28,13 +28,13 @@ object RetrofitNetworkClient {
 
     private fun httpClint(): OkHttpClient =
         OkHttpClient.Builder()
-            .addInterceptor(logginInterceptor())
+            .addInterceptor(loginInterceptor())
             .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
             .readTimeout(TIME_OUT, TimeUnit.SECONDS)
             .writeTimeout(TIME_OUT, TimeUnit.SECONDS)
             .build()
 
-    private fun logginInterceptor() =
+    private fun loginInterceptor() =
         HttpLoggingInterceptor().apply {
             level = if (BuildConfig.DEBUG) {
                 HttpLoggingInterceptor.Level.BODY

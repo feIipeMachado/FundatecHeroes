@@ -32,8 +32,8 @@ class LoginScreenActivity : AppCompatActivity() {
 
         viewModel.state.observe(this) {
             when (it) {
-                is LoginViewState.Success -> snackbarSucesso()
-                is LoginViewState.ErroGeral -> snackbarErroGeral()
+                LoginViewState.Success -> snackbarSucesso()
+                LoginViewState.ErroGeral -> snackbarErroGeral()
                 LoginViewState.Loading -> binding.carregando.visible()
                 LoginViewState.EmailEmBranco ->
                    snackbarEmailEmBranco()

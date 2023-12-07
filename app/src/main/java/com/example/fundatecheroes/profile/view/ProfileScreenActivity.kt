@@ -21,6 +21,7 @@ import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_LONG
 import com.google.android.material.snackbar.Snackbar
 
 class ProfileScreenActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityProfileScreenBinding
     private val viewModel: ProfileViewModel by viewModels();
     override fun onCreate(savedInstanceState: Bundle?) {
