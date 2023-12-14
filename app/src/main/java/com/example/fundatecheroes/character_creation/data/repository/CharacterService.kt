@@ -12,8 +12,9 @@ import retrofit2.http.Query
 
 interface CharacterService {
 
-    @POST("/api/character")
+    @POST("/api/character/{id}")
     suspend fun createCharacter(
+        @Path("id") id: Int,
         @Body characterRequest: CharacterRequest
     ): Response<ResponseBody>
 

@@ -7,4 +7,5 @@ sealed class CharacterViewState {
     object Error : CharacterViewState()
     object AgeError : CharacterViewState()
 
+
 }

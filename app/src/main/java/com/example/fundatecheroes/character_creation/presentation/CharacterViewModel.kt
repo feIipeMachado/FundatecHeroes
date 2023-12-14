@@ -1,12 +1,13 @@
 package com.example.fundatecheroes.character_creation.presentation
 
-import androidx.constraintlayout.motion.utils.ViewState
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.fundatecheroes.character_creation.domain.CharacterUseCase
+import com.example.fundatecheroes.character_creation.presentation.model.CharacterType
 import com.example.fundatecheroes.character_creation.presentation.model.CharacterViewState
+import com.example.fundatecheroes.character_creation.presentation.model.UniverseType
 import kotlinx.coroutines.launch
 import java.util.Date
 
@@ -23,33 +24,34 @@ class CharacterViewModel : ViewModel() {
         name: String,
         description: String,
         image: String,
-        universeType: String,
-        characterType: String,
+        universeType: Int,
+        characterType: Int,
         age: Int,
-        birthday:Date?= null
+        birthday: Date? = null
     ) {
+        //viewState.value = CharacterViewState.Loading
 
-        if(name.isNullOrEmpty()) {
+        if (name.isNullOrEmpty()) {
             viewState.value = CharacterViewState.EmptyFieldError
             return
         }
 
-        if(description.isNullOrEmpty()) {
+        if (description.isNullOrEmpty()) {
             viewState.value = CharacterViewState.EmptyFieldError
             return
         }
 
-        if(image.isNullOrEmpty()) {
+        if (image.isNullOrEmpty()) {
             viewState.value = CharacterViewState.EmptyFieldError
             return
         }
 
-        if(universeType.isNullOrEmpty()) {
+        if (universeType == 0) {
             viewState.value = CharacterViewState.EmptyFieldError
             return
         }
 
-        if (characterType.isNullOrEmpty()) {
+        if (characterType == 0) {
             viewState.value = CharacterViewState.EmptyFieldError
             return
         }
@@ -64,8 +66,8 @@ class CharacterViewModel : ViewModel() {
                 name = name,
                 description = description,
                 image = image,
-                universeType = universeType,
-                characterType = characterType,
+                universeType = UniverseType.valueOf(universeType),
+                characterType = CharacterType.valueOf(characterType),
                 age = age,
                 birthday = birthday
             )

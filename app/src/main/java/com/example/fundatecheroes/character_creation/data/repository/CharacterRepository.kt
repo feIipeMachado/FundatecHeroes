@@ -2,6 +2,7 @@ package com.example.fundatecheroes.character_creation.data.repository
 
 import android.util.Log
 import com.example.fundatecheroes.character_creation.data.CharacterRequest
+import com.example.fundatecheroes.database.FundatecHeroesDatabase
 import com.example.fundatecheroes.login.data.LoginRequest
 import com.example.fundatecheroes.network.RetrofitNetworkClient
 import kotlinx.coroutines.Dispatchers
@@ -15,6 +16,10 @@ class CharacterRepository {
         baseUrl = "https://fundatec.herokuapp.com"
     ).create(CharacterService::class.java)
 
+    private val database by lazy {
+        FundatecHeroesDatabase.getInstance().userDao()
+    }
+
     suspend fun createCharacter(
         name: String,
         description: String,
@@ -27,6 +32,7 @@ class CharacterRepository {
         return withContext(Dispatchers.IO){
             try {
                 val response = repository.createCharacter(
+                    id = database.getUserId(),
                     characterRequest = CharacterRequest(
                         name = name,
                         description = description,

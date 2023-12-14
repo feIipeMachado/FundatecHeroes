@@ -35,8 +35,8 @@ class ProfileScreenActivity : AppCompatActivity() {
 
         viewModel.state.observe(this) {
             when (it) {
-                is ProfileViewState.Success -> snackbarSucesso()
-                is ProfileViewState.Error -> snackbarErroGeral()
+                ProfileViewState.Success -> snackbarSucesso()
+                ProfileViewState.Error -> snackbarErroGeral()
                 ProfileViewState.Loading -> TODO()
                 ProfileViewState.NameError ->
                     snackbarNomeInvalido()
@@ -60,6 +60,7 @@ class ProfileScreenActivity : AppCompatActivity() {
             )
         }
     }
+
     private fun navegarTelaLogin() {
         finish()
     }
@@ -73,7 +74,7 @@ class ProfileScreenActivity : AppCompatActivity() {
         )
             .show()
 
-        Handler(Looper.getMainLooper()).postDelayed({navegarTelaLogin()}, 300L)
+        Handler(Looper.getMainLooper()).postDelayed({ navegarTelaLogin() }, 300L)
 
     }
 

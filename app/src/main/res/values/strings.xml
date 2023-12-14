@@ -16,22 +16,23 @@
     <string name="data_nascimento">Data de nascimento</string>
     <string name="personagem_url">URL da imagem</string>
     <string name="criar_personagem">Criar personagem</string>
-    <string name="descricao_vazia">O campo da descrição está vazio</string>
-    <string name="nome_vazio">O campo do nome está vazio</string>
-    <string name="url_vazia">O campo da URL está vazio</string>
+    <string name="campo_vazio">Um ou mais campos estão vazios</string>
     <string name="personagem_criado">Personagem criado com sucesso!</string>
     <string name="erro_geral_login">Email ou senha inválidos</string>
     <string name="nome_invalido_profile">Nome inválido</string>
     <string name="email_invalido_profile">E-mail inválido</string>
     <string name="senha_invalida_profile">Senha inválido</string>
     <string name="erro_geral_profile">Nome, e-mail ou senha inválidos</string>
-
+    <string name="erro_geral_character">Erro na criação do personagem</string>
+    <string name="idade_invalida">O personagem não pode ter menos que 1 ano</string>
 
     <string-array name="heroi_ou_vilao">
+        <item>Selecione</item>
         <item>Herói</item>
         <item>Vilão</item>
     </string-array>
     <string-array name="marvel_ou_dc">
+        <item>Selecione</item>
         <item>Marvel</item>
         <item>DC</item>
     </string-array>

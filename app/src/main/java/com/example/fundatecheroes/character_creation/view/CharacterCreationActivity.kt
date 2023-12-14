@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModel
 import com.example.fundatecheroes.HomeActivity
 import com.example.fundatecheroes.R
 import com.example.fundatecheroes.character_creation.presentation.CharacterViewModel
+import com.example.fundatecheroes.character_creation.presentation.model.CharacterViewState
 import com.example.fundatecheroes.databinding.ActivityCharacterCreationScreenBinding
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
@@ -39,110 +40,83 @@ class CharacterCreationActivity : AppCompatActivity() {
 
         val spinnerHeroiOuVilao = binding.heroOrVillain
 
-        ArrayAdapter.createFromResource(this, R.array.heroi_ou_vilao, android.R.layout.simple_spinner_item)
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.heroi_ou_vilao,
+            android.R.layout.simple_spinner_item
+        )
             .also { adapter ->
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 spinnerHeroiOuVilao.adapter = adapter
             }
 
-        val spinnerMarvelOuDc = binding.marvelOrDc
 
-        ArrayAdapter.createFromResource(this, R.array.marvel_ou_dc, android.R.layout.simple_spinner_item)
-            .also { adapter ->
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                spinnerMarvelOuDc.adapter = adapter
-            }
-
-
-        binding.dateOfBirth.setOnClickListener{
-            selecionarDataNascimento()
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.marvel_ou_dc,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.marvelOrDc.adapter = adapter
         }
 
-        binding.criarPersonagem.setOnClickListener{
-            val nome = binding.characterName.text.toString()
-            val descricao = binding.characterDescription.text.toString()
-            val url = binding.characterUrl.text.toString()
-            if (validarNome(nome)) {
-                snackbarNomeInvalido()
-            } else if (validarDescricao(descricao)) {
-                snackbarDescricaoInvalida()
-            } else if (validarUrl(url)) {
-                snackbarUrlInvalida()
-            } else {
-                snackbarSucesso()
+        viewModel.state.observe(this) {
+            when (it) {
+                CharacterViewState.Success -> snackbarSucesso()
+                CharacterViewState.Error -> snackbarErroGeral()
+                CharacterViewState.Loading -> TODO()
+                CharacterViewState.EmptyFieldError -> snackbarCampoVazio()
+                CharacterViewState.AgeError -> snackbarIdadeInvalidal()
             }
-
         }
 
+        botaoCriarPersonagem()
     }
 
-    private fun selecionarDataNascimento() {
-        val calendar: Calendar = Calendar.getInstance()
-        val dia: Int = calendar.get(Calendar.DAY_OF_MONTH)
-        val mes: Int = calendar.get(Calendar.MONTH)
-        val ano: Int = calendar.get(Calendar.YEAR)
-        val dateOfBirth = binding.dateOfBirth
 
-        picker = DatePickerDialog(
-            this@CharacterCreationActivity,
-            DatePickerDialog.OnDateSetListener() { datePicker: DatePicker, _: Int, _: Int, _: Int ->
-                fun onDateSet(view: DatePicker, ano: Int, mes: Int, dia: Int) {
-                    dateOfBirth.setText("$dia/$mes/$ano")
-                }
-            }, dia, mes, ano
-        )
-        picker.show()
+    private fun botaoCriarPersonagem() {
+        binding.criarPersonagem.setOnClickListener {
+            viewModel.validarInputs(
+                name = binding.characterName.text.toString(),
+                description = binding.characterDescription.text.toString(),
+                image = binding.characterUrl.text.toString(),
+                universeType = binding.marvelOrDc.selectedItemPosition,
+                characterType = binding.heroOrVillain.selectedItemPosition,
+                age = binding.age.text.toString().toInt()
+            )
+        }
     }
 
-    fun onItemSelected(parent: AdapterView<*>?,
-                                view: View, position: Int,
-                                id: Long) {
-        Toast.makeText(applicationContext,
-            heroiOuVilao[position],
-            Toast.LENGTH_LONG)
-            .show()
-    }
-
-    private fun validarNome(nome: String): Boolean {
-        return nome.isNullOrBlank()
-    }
-
-    private fun validarDescricao(descricao: String): Boolean {
-        return descricao.isNullOrBlank()
-    }
-
-    private fun validarUrl(url: String): Boolean {
-        return url.isNullOrBlank()
-    }
-
-    private fun snackbarNomeInvalido() {
+    private fun snackbarCampoVazio() {
         Snackbar.make(
             binding.root,
-            R.string.nome_vazio,
+            R.string.campo_vazio,
             BaseTransientBottomBar.LENGTH_LONG
         )
             .show()
 
     }
 
-    private fun snackbarDescricaoInvalida() {
+    private fun snackbarErroGeral() {
         Snackbar.make(
             binding.root,
-            R.string.descricao_vazia,
+            R.string.erro_geral_character,
             BaseTransientBottomBar.LENGTH_LONG
         )
             .show()
 
     }
 
-    private fun snackbarUrlInvalida() {
+    private fun snackbarIdadeInvalidal() {
         Snackbar.make(
             binding.root,
-            R.string.url_vazia,
+            R.string.idade_invalida,
             BaseTransientBottomBar.LENGTH_LONG
         )
             .show()
+
     }
+
 
     private fun snackbarSucesso() {
         Snackbar.make(
@@ -152,7 +126,7 @@ class CharacterCreationActivity : AppCompatActivity() {
         )
             .show()
 
-        Handler(Looper.getMainLooper()).postDelayed({navegarHome()}, 2000L)
+        Handler(Looper.getMainLooper()).postDelayed({ navegarHome() }, 2000L)
 
     }
 
