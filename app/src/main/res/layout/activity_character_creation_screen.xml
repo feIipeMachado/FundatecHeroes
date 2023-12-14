@@ -9,7 +9,8 @@
         android:id="@+id/input_character_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="30dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="200dp"
         app:boxBackgroundColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -74,8 +75,18 @@
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:layout_marginTop="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/hero_or_villain"
+        app:layout_constraintTop_toBottomOf="@+id/hero_or_villain"
+        />
+
+    <EditText
+        android:id="@+id/age"
+        android:hint="Idade"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="@id/date_of_birth"
+        app:layout_constraintEnd_toEndOf="@id/date_of_birth"
         app:layout_constraintTop_toBottomOf="@+id/hero_or_villain"
         />
 
@@ -110,6 +121,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="@id/input_character_url"
         android:text="@string/criar_personagem"
+        android:layout_marginTop="50dp"
         />
 
 

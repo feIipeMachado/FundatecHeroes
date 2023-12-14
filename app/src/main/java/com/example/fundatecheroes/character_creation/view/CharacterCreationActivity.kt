@@ -15,8 +15,11 @@ import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.lifecycle.ViewModel
 import com.example.fundatecheroes.HomeActivity
 import com.example.fundatecheroes.R
+import com.example.fundatecheroes.character_creation.presentation.CharacterViewModel
 import com.example.fundatecheroes.databinding.ActivityCharacterCreationScreenBinding
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
@@ -27,6 +30,7 @@ class CharacterCreationActivity : AppCompatActivity() {
     private lateinit var picker: DatePickerDialog
     private var heroiOuVilao = arrayOf(R.array.heroi_ou_vilao)
     private var marvelOuDc = arrayOf(R.array.marvel_ou_dc)
+    private val viewModel: CharacterViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCharacterCreationScreenBinding.inflate(layoutInflater)
