@@ -1,6 +1,8 @@
 package com.example.fundatecheroes.character_creation.domain
 
+import com.example.fundatecheroes.character_creation.data.remote.CharacterResponse
 import com.example.fundatecheroes.character_creation.data.repository.CharacterRepository
+import com.example.fundatecheroes.home.domain.CharacterModel
 import java.util.Date
 
 class CharacterUseCase {
@@ -15,7 +17,7 @@ class CharacterUseCase {
         universeType: String,
         characterType: String,
         age: Int,
-        birthday: Date?= null
+        birthday: Date? = null
     ): Boolean {
         return repository.createCharacter(
             name = name,
@@ -26,5 +28,9 @@ class CharacterUseCase {
             age = age,
             birthday = birthday
         )
+    }
+
+    suspend fun getCharacter(): List<CharacterModel> {
+        return repository.getCharacter()
     }
 }

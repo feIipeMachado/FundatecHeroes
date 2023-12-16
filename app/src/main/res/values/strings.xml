@@ -25,6 +25,7 @@
     <string name="erro_geral_profile">Nome, e-mail ou senha inválidos</string>
     <string name="erro_geral_character">Erro na criação do personagem</string>
     <string name="idade_invalida">O personagem não pode ter menos que 1 ano</string>
+    <string name="lista_vazia">O usuário não possui nenhum personagem registrado</string>
 
     <string-array name="heroi_ou_vilao">
         <item>Selecione</item>

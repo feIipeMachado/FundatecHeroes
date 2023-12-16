@@ -1,7 +1,8 @@
 package com.example.fundatecheroes.character_creation.data.remote
 
-import java.util.Date
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class CharacterResponse(
     val id: Int,
     val name: String,
@@ -10,5 +11,5 @@ data class CharacterResponse(
     val universeType: String,
     val characterType: String,
     val age: Int,
-    val birthday: Date? = null
+    val birthday: String? = null
 )

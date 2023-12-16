@@ -60,6 +60,8 @@ class CharacterCreationActivity : AppCompatActivity() {
             binding.marvelOrDc.adapter = adapter
         }
 
+        botaoCriarPersonagem()
+
         viewModel.state.observe(this) {
             when (it) {
                 CharacterViewState.Success -> snackbarSucesso()
@@ -69,8 +71,6 @@ class CharacterCreationActivity : AppCompatActivity() {
                 CharacterViewState.AgeError -> snackbarIdadeInvalidal()
             }
         }
-
-        botaoCriarPersonagem()
     }
 
 
