@@ -33,4 +33,8 @@ class CharacterUseCase {
     suspend fun getCharacter(): List<CharacterModel> {
         return repository.getCharacter()
     }
+
+    suspend fun deleteCharacter(id: Int): Boolean {
+        return repository.deleteCharacter(id = id)
+    }
 }

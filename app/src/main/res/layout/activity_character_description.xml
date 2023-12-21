@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".character_description.view.CharacterDescriptionActivity">
+
+    <ImageView
+        android:id="@+id/imagemPersonagem"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/batmanpng"
+        android:scaleType="centerCrop"
+    />
+
+    <TextView
+        android:id="@+id/nomeImagemPersonagem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/imagemPersonagem"
+        app:layout_constraintEnd_toEndOf="@id/imagemPersonagem"
+        android:textSize="40dp"
+        android:textColor="@color/white"
+        tools:text="personagem"
+        />
+    <TextView
+        android:background="@color/material_dynamic_tertiary70"
+        android:id="@+id/descricaoPersonagem"
+        android:padding="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="27dp"
+        tools:text="descricao do personagem blablablablabla"
+        app:layout_constraintTop_toBottomOf="@id/imagemPersonagem"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+    <TextView
+        android:background="@color/material_dynamic_tertiary70"
+        android:layout_marginTop="10dp"
+        android:id="@+id/idadePersonagem"
+        android:padding="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="27dp"
+        tools:text="idade: 215 anos"
+        app:layout_constraintTop_toBottomOf="@id/descricaoPersonagem"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+    <ImageView
+        android:id="@+id/marvelDc"
+        android:layout_width="250dp"
+        android:layout_height="150dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="100dp"
+        tools:src="@drawable/marveldclogo"
+        android:scaleType="centerCrop"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

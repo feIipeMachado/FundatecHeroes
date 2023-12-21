@@ -13,6 +13,6 @@ class CharacterViewHolder(
         Glide.with(binding.root.context)
             .load(character.image)
             .into(binding.ivCharacter)
-        binding.batman.text = character.name
+        binding.descricao.text = character.name
     }
 }

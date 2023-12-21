@@ -5,6 +5,7 @@ import com.example.fundatecheroes.character_creation.data.remote.CharacterRespon
 import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -22,4 +23,9 @@ interface CharacterService {
     suspend fun getCharacter(
         @Path("id") id: Int
     ): Response<List<CharacterResponse>>
+
+    @DELETE("/api/character/{id}")
+    suspend fun deleteCharaccter(
+        @Path("id") id: Int
+    ): Response<ResponseBody>
 }

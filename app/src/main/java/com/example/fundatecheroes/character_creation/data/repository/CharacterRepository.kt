@@ -10,6 +10,7 @@ import com.example.fundatecheroes.login.data.LoginRequest
 import com.example.fundatecheroes.network.RetrofitNetworkClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import retrofit2.http.DELETE
 import java.lang.Exception
 import java.util.Date
 
@@ -64,6 +65,20 @@ class CharacterRepository {
             } catch (ex: Exception) {
                 Log.e("getCharacter", ex.message.toString())
                 listOf()
+            }
+        }
+    }
+
+    suspend fun deleteCharacter(id: Int): Boolean {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = repository.deleteCharaccter(
+                    id = id,
+                )
+                response.isSuccessful
+            } catch (ex: Exception) {
+                Log.e("deleteCharacter", ex.message.toString())
+                false
             }
         }
     }

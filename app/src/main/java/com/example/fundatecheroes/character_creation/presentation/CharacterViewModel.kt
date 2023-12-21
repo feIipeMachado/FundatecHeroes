@@ -19,7 +19,6 @@ class CharacterViewModel : ViewModel() {
     private val useCase by lazy {
         CharacterUseCase()
     }
-
     fun validarInputs(
         name: String,
         description: String,

@@ -27,9 +27,16 @@ class HomeViewModel : ViewModel() {
 
     private fun validarLista(lista: List<CharacterModel>) {
         if (lista.isEmpty()) {
-            viewState.value = HomeViewState.Error
+            viewState.value = HomeViewState.EmptyList
         } else {
             viewState.value = HomeViewState.Success(lista)
+        }
+    }
+
+    fun deletarPersonagem(id: Int) {
+        viewModelScope.launch {
+            useCase.deleteCharacter(id)
+            viewState.value = HomeViewState.DeleteCharacter
         }
     }
 
