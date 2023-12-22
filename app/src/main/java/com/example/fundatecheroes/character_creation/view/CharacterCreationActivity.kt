@@ -22,6 +22,8 @@ import com.example.fundatecheroes.R
 import com.example.fundatecheroes.character_creation.presentation.CharacterViewModel
 import com.example.fundatecheroes.character_creation.presentation.model.CharacterViewState
 import com.example.fundatecheroes.databinding.ActivityCharacterCreationScreenBinding
+import com.example.fundatecheroes.gone
+import com.example.fundatecheroes.visible
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import java.util.Calendar
@@ -66,7 +68,7 @@ class CharacterCreationActivity : AppCompatActivity() {
             when (it) {
                 CharacterViewState.Success -> snackbarSucesso()
                 CharacterViewState.Error -> snackbarErroGeral()
-                CharacterViewState.Loading -> TODO()
+                CharacterViewState.Loading -> binding.carregandoCriarPersonagem.visible()
                 CharacterViewState.EmptyFieldError -> snackbarCampoVazio()
                 CharacterViewState.AgeError -> snackbarIdadeInvalidal()
             }
@@ -104,6 +106,8 @@ class CharacterCreationActivity : AppCompatActivity() {
             BaseTransientBottomBar.LENGTH_LONG
         )
             .show()
+        binding.carregandoCriarPersonagem.gone()
+
 
     }
 
@@ -125,6 +129,7 @@ class CharacterCreationActivity : AppCompatActivity() {
             BaseTransientBottomBar.LENGTH_LONG
         )
             .show()
+        binding.carregandoCriarPersonagem.gone()
 
         Handler(Looper.getMainLooper()).postDelayed({ navegarHome() }, 2000L)
 

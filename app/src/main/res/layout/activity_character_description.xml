@@ -40,16 +40,17 @@
     <TextView
         android:background="@color/material_dynamic_tertiary70"
         android:layout_marginTop="10dp"
-        android:id="@+id/idadePersonagem"
+        android:id="@+id/idadeFixo"
         android:padding="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:textSize="27dp"
-        tools:text="idade: 215 anos"
+        tools:text="idade:"
         app:layout_constraintTop_toBottomOf="@id/descricaoPersonagem"
         app:layout_constraintStart_toStartOf="parent"
         />
+
     <ImageView
         android:id="@+id/marvelDc"
         android:layout_width="250dp"

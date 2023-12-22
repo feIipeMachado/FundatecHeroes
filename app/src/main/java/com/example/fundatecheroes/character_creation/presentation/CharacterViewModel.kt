@@ -28,7 +28,7 @@ class CharacterViewModel : ViewModel() {
         age: Int,
         birthday: Date? = null
     ) {
-        //viewState.value = CharacterViewState.Loading
+        viewState.value = CharacterViewState.Loading
 
         if (name.isNullOrEmpty()) {
             viewState.value = CharacterViewState.EmptyFieldError

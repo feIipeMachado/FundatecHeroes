@@ -34,7 +34,7 @@ class LoginScreenActivity : AppCompatActivity() {
             when (it) {
                 LoginViewState.Success -> snackbarSucesso()
                 LoginViewState.ErroGeral -> snackbarErroGeral()
-                LoginViewState.Loading -> binding.carregando.visible()
+                LoginViewState.Loading -> binding.carregandoLogin.visible()
                 LoginViewState.EmailEmBranco ->
                    snackbarEmailEmBranco()
 
@@ -66,7 +66,7 @@ class LoginScreenActivity : AppCompatActivity() {
             BaseTransientBottomBar.LENGTH_LONG
         )
             .show()
-        binding.carregando.gone()
+        binding.carregandoLogin.gone()
 
         Handler(Looper.getMainLooper()).postDelayed({navegarTelaHome()}, 300L)
 
@@ -86,7 +86,7 @@ class LoginScreenActivity : AppCompatActivity() {
             BaseTransientBottomBar.LENGTH_LONG
         )
             .show()
-        binding.carregando.gone()
+        binding.carregandoLogin.gone()
 
 
     }
@@ -98,7 +98,7 @@ class LoginScreenActivity : AppCompatActivity() {
             BaseTransientBottomBar.LENGTH_LONG
         )
             .show()
-        binding.carregando.gone()
+        binding.carregandoLogin.gone()
 
     }
 
@@ -109,7 +109,7 @@ class LoginScreenActivity : AppCompatActivity() {
             BaseTransientBottomBar.LENGTH_LONG
         )
             .show()
-        binding.carregando.gone()
+        binding.carregandoLogin.gone()
 
     }
 

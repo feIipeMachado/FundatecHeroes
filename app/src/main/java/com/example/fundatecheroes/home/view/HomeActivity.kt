@@ -32,11 +32,11 @@ class HomeActivity : AppCompatActivity() {
 
 
 
-        viewModel.state.observe(this){
+        viewModel.state.observe(this) {
             when (it) {
-                is HomeViewState.Success -> adapter.addList(it.listaPersonagens)
+                is HomeViewState.Success -> { adapter.addList(it.listaPersonagens); binding.carregandoHome.gone()}
                 HomeViewState.EmptyList -> snackbarListaVazia()
-                HomeViewState.Loading -> TODO()
+                HomeViewState.Loading -> binding.carregandoHome.visible()
                 HomeViewState.DeleteCharacter -> snackbarDeletarPersonagem()
             }
         }
@@ -46,7 +46,12 @@ class HomeActivity : AppCompatActivity() {
 
     private fun swipeDeletarPersonagem() {
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
-            override fun onMove(v: RecyclerView, h: RecyclerView.ViewHolder, t: RecyclerView.ViewHolder) = false
+            override fun onMove(
+                v: RecyclerView,
+                h: RecyclerView.ViewHolder,
+                t: RecyclerView.ViewHolder
+            ) = false
+
             override fun onSwiped(h: RecyclerView.ViewHolder, dir: Int) {
                 val id = adapter.getIdAt(h.adapterPosition)
                 viewModel.deletarPersonagem(id)
@@ -54,6 +59,7 @@ class HomeActivity : AppCompatActivity() {
             }
         }).attachToRecyclerView(binding.list)
     }
+
     private fun botaoCriarPersonagem() {
         binding.criarPersonagem.setOnClickListener {
             val intent = Intent(this@HomeActivity, CharacterCreationActivity::class.java)
@@ -68,6 +74,7 @@ class HomeActivity : AppCompatActivity() {
             BaseTransientBottomBar.LENGTH_LONG
         )
             .show()
+        binding.carregandoHome.gone()
 
     }
 
@@ -80,8 +87,6 @@ class HomeActivity : AppCompatActivity() {
             .show()
 
     }
-
-
 
 
 }

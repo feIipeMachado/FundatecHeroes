@@ -20,12 +20,14 @@ class HomeViewModel : ViewModel() {
 
     private fun listarPersonagens() {
         viewModelScope.launch {
+            viewState.value = HomeViewState.Loading
             validarLista(useCase.getCharacter())
         }
 
     }
 
     private fun validarLista(lista: List<CharacterModel>) {
+
         if (lista.isEmpty()) {
             viewState.value = HomeViewState.EmptyList
         } else {
