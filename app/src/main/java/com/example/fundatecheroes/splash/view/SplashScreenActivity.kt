@@ -22,7 +22,7 @@ class SplashScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
-        getSupportActionBar()?.hide()
+        supportActionBar?.hide()
         viewmodel.state.observe(this) {
             when (it) {
                 SplashViewState.showLogin -> mostrarTelaLogin()

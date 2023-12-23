@@ -88,7 +88,11 @@ class CharacterRepository {
             CharacterModel(
                 id = characterResponse.id,
                 name =  characterResponse.name,
-                image = characterResponse.image
+                image = characterResponse.image,
+                description = characterResponse.description,
+                age = characterResponse.age,
+                universeType = characterResponse.universeType,
+                characterType = characterResponse.characterType
             )
         }
     }

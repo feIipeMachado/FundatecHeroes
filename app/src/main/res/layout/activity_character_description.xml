@@ -13,9 +13,10 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/batmanpng"
         android:scaleType="centerCrop"
-    />
+        />
 
     <TextView
+        android:background="@color/purple_700"
         android:id="@+id/nomeImagemPersonagem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,28 +27,43 @@
         tools:text="personagem"
         />
     <TextView
-        android:background="@color/material_dynamic_tertiary70"
+        android:layout_marginTop="10dp"
+        android:background="@color/purple_700"
         android:id="@+id/descricaoPersonagem"
         android:padding="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="27dp"
         tools:text="descricao do personagem blablablablabla"
         app:layout_constraintTop_toBottomOf="@id/imagemPersonagem"
         app:layout_constraintStart_toStartOf="parent"
         />
     <TextView
-        android:background="@color/material_dynamic_tertiary70"
+        android:background="@color/purple_700"
         android:layout_marginTop="10dp"
-        android:id="@+id/idadeFixo"
+        android:id="@+id/idade"
         android:padding="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="27dp"
         tools:text="idade:"
         app:layout_constraintTop_toBottomOf="@id/descricaoPersonagem"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <TextView
+        android:background="@color/purple_700"
+        android:layout_marginTop="10dp"
+        android:id="@+id/heroiOuVilao"
+        android:padding="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="27dp"
+        tools:text="heroi ou vilao:"
+        app:layout_constraintTop_toBottomOf="@id/idade"
         app:layout_constraintStart_toStartOf="parent"
         />
 
@@ -58,9 +74,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="50dp"
         tools:src="@drawable/marveldclogo"
-        android:scaleType="centerCrop"
+        android:scaleType="fitCenter"
         />
 
 

@@ -3,11 +3,15 @@ package com.example.fundatecheroes
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.activity.addCallback
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fundatecheroes.character_creation.view.CharacterCreationActivity
+import com.example.fundatecheroes.character_description.view.CharacterDescriptionActivity
 import com.example.fundatecheroes.databinding.ActivityHomeBinding
+import com.example.fundatecheroes.home.domain.CharacterModel
 import com.example.fundatecheroes.home.presentation.HomeViewModel
 import com.example.fundatecheroes.home.presentation.model.HomeViewState
 import com.example.fundatecheroes.home.view.CharacterListAdapter
@@ -18,23 +22,28 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
     private val viewModel: HomeViewModel by viewModels()
     private val adapter: CharacterListAdapter by lazy {
-        CharacterListAdapter()
+        CharacterListAdapter() {
+            navegarTelaDescricaoPersonagem(it)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
+        supportActionBar?.hide()
+
         setContentView(binding.root)
         binding.list.adapter = adapter
 
         botaoCriarPersonagem()
         swipeDeletarPersonagem()
 
-
-
         viewModel.state.observe(this) {
             when (it) {
-                is HomeViewState.Success -> { adapter.addList(it.listaPersonagens); binding.carregandoHome.gone()}
+                is HomeViewState.Success -> {
+                    adapter.addList(it.listaPersonagens); binding.carregandoHome.gone()
+                }
+
                 HomeViewState.EmptyList -> snackbarListaVazia()
                 HomeViewState.Loading -> binding.carregandoHome.visible()
                 HomeViewState.DeleteCharacter -> snackbarDeletarPersonagem()
@@ -42,7 +51,6 @@ class HomeActivity : AppCompatActivity() {
         }
 
     }
-
 
     private fun swipeDeletarPersonagem() {
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
@@ -57,6 +65,7 @@ class HomeActivity : AppCompatActivity() {
                 viewModel.deletarPersonagem(id)
                 adapter.removeAt(h.adapterPosition)
             }
+
         }).attachToRecyclerView(binding.list)
     }
 
@@ -89,6 +98,15 @@ class HomeActivity : AppCompatActivity() {
     }
 
 
+    private fun navegarTelaDescricaoPersonagem(characterModel: CharacterModel){
+        val intent = Intent(this@HomeActivity, CharacterDescriptionActivity::class.java)
+        intent.putExtra("character", characterModel);
+        startActivity(intent)
+    }
+
+
 }
+
+
 
 

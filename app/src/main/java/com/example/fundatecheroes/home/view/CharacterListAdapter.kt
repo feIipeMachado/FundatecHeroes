@@ -7,12 +7,15 @@ import com.example.fundatecheroes.databinding.CharacterItemListBinding
 import com.example.fundatecheroes.home.domain.CharacterModel
 
 
-class CharacterListAdapter : RecyclerView.Adapter<CharacterViewHolder>() {
+class CharacterListAdapter(
+    private val listener: (CharacterModel) -> Unit
+) : RecyclerView.Adapter<CharacterViewHolder>() {
     private val list: MutableList<CharacterModel> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
-        val binding = CharacterItemListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return CharacterViewHolder(binding)
+        val binding =
+            CharacterItemListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return CharacterViewHolder(binding, listener)
     }
 
 
@@ -24,7 +27,7 @@ class CharacterListAdapter : RecyclerView.Adapter<CharacterViewHolder>() {
         return list.size
     }
 
-    fun addList(items:List<CharacterModel>) {
+    fun addList(items: List<CharacterModel>) {
         list.addAll(items)
         notifyDataSetChanged()
     }
@@ -33,6 +36,7 @@ class CharacterListAdapter : RecyclerView.Adapter<CharacterViewHolder>() {
         val id = list.get(index).id
         return id
     }
+
     fun removeAt(index: Int) {
         list.removeAt(index)
         notifyItemRemoved(index)
